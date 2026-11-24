@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Your account</title>
+    <style>
+        * { box-sizing: border-box; }
+        body { margin: 0; min-height: 100vh; display: grid; place-items: center; padding: 24px; background: #f3f6fb; color: #17243b; font-family: system-ui, sans-serif; }
+        main { width: min(100%, 560px); background: white; border: 1px solid #dde5ef; border-radius: 20px; box-shadow: 0 16px 48px #17243b0a; overflow: hidden; }
+        .profile { padding: 32px; background: #f9fbfe; min-width: 0; }
+        h1 { margin: 0; font-size: 32px; letter-spacing: -.04em; }
+        h2 { margin: 24px 0; font-size: 22px; }
+        p { line-height: 1.6; color: #526079; }
+        .avatar { display: block; width: 96px; height: 96px; border-radius: 50%; object-fit: cover; border: 1px solid #dde5ef; }
+        dt { margin-top: 18px; font-size: 13px; color: #526079; }
+        dd { margin: 4px 0 0; overflow-wrap: anywhere; }
+        button { display: inline-block; margin-top: 20px; padding: 12px 20px; border-radius: 8px; background: #234fa5; color: white; border: 0; font: inherit; font-weight: 600; cursor: pointer; }
+        button:hover { background: #193e86; }
+        button:focus-visible { outline: 3px solid #7ca4f4; outline-offset: 4px; }
+        @media (max-width: 700px) {
+            body { padding: 16px; }
+            .profile { padding: 24px; }
+        }
+    </style>
+</head>
+<body>
+<main>
+    <aside class="profile" aria-labelledby="profile-heading">
+        <img th:if="${avatarUrl != null}" th:src="${avatarUrl}" class="avatar"
+             width="96" height="96" alt="Your GitHub avatar" referrerpolicy="no-referrer">
+        <h2 id="profile-heading">Your GitHub account</h2>
+        <dl>
+            <dt>Username</dt><dd th:text="${githubLogin ?: 'Not provided'}"></dd>
+            <dt>Name</dt><dd th:text="${displayName ?: 'Not provided'}"></dd>
+            <dt>GitHub ID</dt><dd th:text="${githubId ?: 'Not provided'}"></dd>
+            <dt>Email</dt><dd th:text="${email ?: 'Not provided'}"></dd>
+        </dl>
+        <form th:action="@{/logout}" method="post">
+            <button type="submit">Sign out</button>
+        </form>
+    </aside>
+</main>
+</body>
+</html>
