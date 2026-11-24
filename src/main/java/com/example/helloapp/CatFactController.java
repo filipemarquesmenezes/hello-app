@@ -4,28 +4,19 @@ import org.springframework.http.CacheControl;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.http.client.JdkClientHttpRequestFactory;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestClient;
 import org.springframework.web.client.RestClientException;
 import org.springframework.web.server.ResponseStatusException;
 
-import java.net.http.HttpClient;
-import java.time.Duration;
-
 @RestController
 public class CatFactController {
 
     private final RestClient client;
 
-    public CatFactController() {
-        HttpClient httpClient = HttpClient.newBuilder()
-                .connectTimeout(Duration.ofSeconds(3))
-                .build();
-        JdkClientHttpRequestFactory requestFactory = new JdkClientHttpRequestFactory(httpClient);
-        requestFactory.setReadTimeout(Duration.ofSeconds(5));
-        client = RestClient.builder().requestFactory(requestFactory).build();
+    public CatFactController(RestClient client) {
+        this.client = client;
     }
 
     @GetMapping(path = "/api/cat-fact", produces = MediaType.APPLICATION_JSON_VALUE)
