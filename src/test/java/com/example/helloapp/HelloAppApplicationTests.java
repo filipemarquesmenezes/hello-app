@@ -53,9 +53,11 @@ class HelloAppApplicationTests {
 
 	@Test
 	void otherRoutesRequireAuthentication() throws Exception {
-		mvc.perform(get("/landing.html"))
-				.andExpect(status().is3xxRedirection())
-				.andExpect(redirectedUrl("/welcome.html"));
+		for (String path : new String[]{"/landing.html", "/api/cat-fact"}) {
+			mvc.perform(get(path))
+					.andExpect(status().is3xxRedirection())
+					.andExpect(redirectedUrl("/welcome.html"));
+		}
 	}
 
 	@Test
@@ -82,7 +84,7 @@ class HelloAppApplicationTests {
 				.andExpect(content().string(org.hamcrest.Matchers.containsString("src=\"https://avatars.githubusercontent.com/u/12345\"")))
 				.andExpect(content().string(org.hamcrest.Matchers.containsString("Sign out")))
 				.andExpect(content().string(org.hamcrest.Matchers.containsString("name=\"_csrf\"")))
-				.andExpect(content().string(org.hamcrest.Matchers.not(org.hamcrest.Matchers.containsString("<script"))));
+				.andExpect(content().string(org.hamcrest.Matchers.containsString("data-url=\"/api/cat-fact\"")));
 	}
 
 	@Test

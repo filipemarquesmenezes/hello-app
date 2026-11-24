@@ -15,7 +15,8 @@ your GitHub avatar, username, name, ID, email when available, and a sign-out but
 When running from an IDE, add these variables to the run configuration.
 The OAuth application's
 callback URL for local development is `http://localhost:8080/login/oauth2/code/github`.
-Both pages are rendered on the server with Thymeleaf and use no JavaScript.
+Both pages are rendered on the server with Thymeleaf. The landing page uses
+JavaScript to fetch a cat fact from the authenticated `/api/cat-fact` endpoint.
 
 ## Environment variables with mise
 

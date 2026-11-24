@@ -40,6 +40,31 @@
             <button type="submit">Sign out</button>
         </form>
     </aside>
+    <section class="profile" aria-labelledby="cat-fact-heading">
+        <h2 id="cat-fact-heading">Cat fact</h2>
+        <p id="cat-fact" th:data-url="@{/api/cat-fact}" role="status">Loading a cat fact…</p>
+    </section>
 </main>
+<script>
+    const catFact = document.getElementById('cat-fact');
+
+    async function loadCatFact() {
+        try {
+            const response = await fetch(catFact.dataset.url, {
+                headers: { Accept: 'application/json' },
+                redirect: 'error'
+            });
+            if (!response.ok) {
+                throw new Error('Could not load a cat fact');
+            }
+            const { fact } = await response.json();
+            catFact.textContent = fact;
+        } catch {
+            catFact.textContent = 'Could not load a cat fact. Try reloading the page.';
+        }
+    }
+
+    loadCatFact();
+</script>
 </body>
 </html>

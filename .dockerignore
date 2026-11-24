@@ -1,0 +1,7 @@
+.git
+.gradle
+.idea
+.vercel
+build
+.env*
+mise.local.toml
