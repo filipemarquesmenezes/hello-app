@@ -84,7 +84,8 @@ class HelloAppApplicationTests {
 				.andExpect(content().string(org.hamcrest.Matchers.containsString("src=\"https://avatars.githubusercontent.com/u/12345\"")))
 				.andExpect(content().string(org.hamcrest.Matchers.containsString("Sign out")))
 				.andExpect(content().string(org.hamcrest.Matchers.containsString("name=\"_csrf\"")))
-				.andExpect(content().string(org.hamcrest.Matchers.containsString("data-url=\"/api/cat-fact\"")));
+				.andExpect(content().string(org.hamcrest.Matchers.containsString("data-url=\"/api/cat-fact\"")))
+				.andExpect(content().string(org.hamcrest.Matchers.containsString("Tasks")));
 	}
 
 	@Test

@@ -7,8 +7,17 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
+import java.util.Comparator;
+import java.util.List;
+
 @Controller
 public class WelcomeController {
+
+    private final TaskRepository taskRepository;
+
+    public WelcomeController(TaskRepository taskRepository) {
+        this.taskRepository = taskRepository;
+    }
 
     @GetMapping({"/", "/welcome.html", "/login"})
     public String welcome(HttpServletResponse response, @AuthenticationPrincipal OAuth2User user) {
@@ -25,6 +34,12 @@ public class WelcomeController {
         model.addAttribute("githubId", user.getAttribute("id"));
         model.addAttribute("email", user.getAttribute("email"));
         model.addAttribute("avatarUrl", user.getAttribute("avatar_url"));
+
+        List<Task> tasks = taskRepository.findAll().stream()
+                .sorted(Comparator.comparing(Task::status).thenComparing(Task::description))
+                .toList();
+        model.addAttribute("tasks", tasks);
+        model.addAttribute("statuses", TaskStatus.values());
         return "landing";
     }
 }
