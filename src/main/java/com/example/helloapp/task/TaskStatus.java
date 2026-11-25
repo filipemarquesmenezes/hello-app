@@ -1,4 +1,4 @@
-package com.example.helloapp;
+package com.example.helloapp.task;
 
 public enum TaskStatus {
     PENDING,

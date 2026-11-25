@@ -1,4 +1,4 @@
-package com.example.helloapp;
+package com.example.helloapp.catfact;
 
 import org.springframework.http.CacheControl;
 import org.springframework.http.HttpStatus;

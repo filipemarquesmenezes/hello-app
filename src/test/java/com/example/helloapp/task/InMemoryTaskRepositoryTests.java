@@ -1,4 +1,4 @@
-package com.example.helloapp;
+package com.example.helloapp.task;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

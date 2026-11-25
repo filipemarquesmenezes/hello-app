@@ -1,5 +1,8 @@
-package com.example.helloapp;
+package com.example.helloapp.welcome;
 
+import com.example.helloapp.task.Task;
+import com.example.helloapp.task.TaskRepository;
+import com.example.helloapp.task.TaskStatus;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.oauth2.core.user.OAuth2User;
